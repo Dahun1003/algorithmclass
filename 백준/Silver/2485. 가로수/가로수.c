@@ -4,11 +4,9 @@ int divisor(int a, int b);
 
 int main(void)
 {
-	int num1, i;
+	int num1, i, gap, total = 0;
 	int tree[100000];
 	int distance[100000];
-	int gap;
-	int count = 0;
 	
 	scanf("%d", &num1);
 
@@ -31,22 +29,35 @@ int main(void)
 	
 	for (i = 1; i < num1; i++)
 		{
-		count += ((distance[i] / gap) - 1);
+		total += ((distance[i] / gap) - 1);
 		}
 
-		printf("%d", count);
+		printf("%d", total);
 
 	return 0;
 }
 
 int divisor(int a, int b)
 {
-	if (b == 0)
+	int big = a, small = b, num1, num2;
+	
+
+	if (a < b)
 	{
-		return a;
+		big = b;
+		small = a;
 	}
-	else
+	
+	for(;;)
 	{
-		return divisor(b, a % b);
+		num1 = big / small;
+		num2 = big % small;
+		if (num2 == 0) 
+			break;
+		
+		big = small;
+		small = num2;
 	}
+
+	return small;
 }
