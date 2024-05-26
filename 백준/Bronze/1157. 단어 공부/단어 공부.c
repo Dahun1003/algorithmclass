@@ -1,31 +1,35 @@
 #include <stdio.h>
 #include <string.h>
 
-char a[1000005];
-int arr[26];
+int main() {
+    int max = 0, i;
+    char word;
 
-int main(){
-    int max = 0;
-    int size;
-    char ans;
+    char a[1000000];
+    int arr[26] = { 0, };
 
-    scanf("%s",a);
-    size = strlen(a);
+    scanf("%s", &a);
 
-    for(int i=0;i<size;i++)
-        if(a[i]>='a') arr[a[i]-'a']++;
-        else arr[a[i]-'A']++;
+    int size = strlen(a);
 
-    for(int i=0;i<26;i++)
-        if(arr[i]==max){
-            ans = '?';
-        }
-        else if(arr[i]>max){
+    for (i = 0; i < size; i++) {
+        if (a[i] >= 97)
+            arr[a[i] - 97]++;
+        else
+            arr[a[i] - 65]++;
+    }
+
+    for (i = 0; i < 26; i++) {
+        if (arr[i] > max) {
             max = arr[i];
-            ans = 'A'+i;
+            word = 65 + i;
         }
+        else if (arr[i] == max) {
+            word = 63;
+        }
+    }
 
-    printf("%c",ans);
+    printf("%c", word);
 
     return 0;
 }
